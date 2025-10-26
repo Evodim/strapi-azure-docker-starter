@@ -1,0 +1,34 @@
+name: Build and Push Docker Image
+
+description: Composite action to build and push Docker images.
+
+inputs:
+  acr_registry:
+    description: 'Azure Container Registry (ACR) login server'
+    required: true
+  image_name:
+    description: 'Name of the Docker image'
+    required: true
+  image_tag:
+    description: 'Tag for the Docker image'
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Set IMAGE_TAG from input
+      run: echo "IMAGE_TAG=${{ inputs.image_tag }}" >> $GITHUB_ENV
+      shell: bash
+    # Build the Docker image
+    - name: Build Docker image
+      run: |       
+       docker build -t ${{ inputs.acr_registry }}/${{ inputs.image_name }}:${{ env.IMAGE_TAG }} ./image
+      shell: bash
+
+    # Push the Docker image to ACR
+    - name: Push Docker image
+      run: |
+        docker push ${{ inputs.acr_registry }}/${{ inputs.image_name }}:${{ env.IMAGE_TAG }}
+      shell: bash

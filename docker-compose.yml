@@ -1,0 +1,39 @@
+version: "3"
+
+services: 
+ strapi-service:
+    container_name: strapi-azure
+    image: evodim/strapi-azure:latest
+    volumes: 
+      - ./app:/srv/app/src 
+      
+    #command: develop
+    environment:
+      - DATABASE_FILENAME=${DATABASE_FILENAME}
+      - DATABASE_CLIENT=${DATABASE_CLIENT}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_SSL=${DATABASE_SSL}   
+      - DATABASE_SSL_SELF=${DATABASE_SSL_SELF}
+      - STORAGE_ACCOUNT=${STORAGE_ACCOUNT}  
+      - STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}  
+      - STORAGE_URL=${STORAGE_URL}  
+      - STORAGE_CONTAINER_NAME=${STORAGE_CONTAINER_NAME}  
+      - STORAGE_CDN_URL=${STORAGE_CDN_URL}  
+      - STORAGE_DEFAULT_PATH=${STORAGE_DEFAULT_PATH}  
+      - STORAGE_MAX_CONCURRENT=${STORAGE_MAX_CONCURRENT}   
+      - SERVER_PORT=${SERVER_PORT}
+      - ADMIN_JWT_SECRET=${ADMIN_JWT_SECRET}
+      - NODE_ENV=${NODE_ENV}      
+      - JWT_SECRET=${JWT_SECRET}
+      - TRANSFER_TOKEN_SALT=${TRANSFER_TOKEN_SALT}
+      - APP_KEYS=${APP_KEYS}
+      - API_TOKEN_SALT=${API_TOKEN_SALT}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS} # New environment variable for allowed hosts in Vite config    
+
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    restart: unless-stopped
