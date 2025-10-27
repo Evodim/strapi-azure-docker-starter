@@ -262,21 +262,14 @@ docker pull evodim/strapi-azure:v2.5.28
 
 ```bash
 # Use latest for newest features
-docker pull evodim/strapi-azure:latest
-```
-
-**For Testing:**
-
-```bash
-# Use dev tag for development features
-docker pull evodim/strapi-azure:dev
+docker pull evodim/strapi-azure:vX.X.XX-preview
 ```
 
 ## Feedback & Support
 
 We welcome your feedback and contributions!
 
-- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/Evodim/strapi-azure-docker/issues)
+- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/Evodim/strapi-azure-docker-starter/issues)
 - **Contributions**: Submit pull requests to improve the image
 
 ## License
