@@ -28,7 +28,7 @@ RUN apk update && apk add --no-cache \
     && rm -rf /var/cache/apk/*
     
 # Set up Node.js environment
-RUN yarn global add node-gyp && \
+RUN yarn global add node-gyp patch-package && \
     yarn config set network-timeout 600000 -g
 
 # Create Strapi application directory and initialize
@@ -60,8 +60,7 @@ RUN yarn add \
     strapi-provider-upload-azure-storage \
     @strapi/utils \
     @strapi/plugin-documentation \
-    @strapi/database
-   
+    @strapi/database 
 
 # Create src directory
 RUN mkdir -p src
