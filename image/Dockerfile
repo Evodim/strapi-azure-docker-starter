@@ -36,7 +36,7 @@ WORKDIR /srv
 
 # Create Strapi application using the correct method
 RUN echo "Starting Strapi creation..." && \
-    printf "n\n" | npx create-strapi-app@5.28.0 app \
+    printf "n\n" | npx create-strapi-app@5.30.0 app \
     --no-run \
     --install \
     --js \

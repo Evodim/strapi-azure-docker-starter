@@ -30,11 +30,11 @@ This Docker image is specifically designed for **Azure-first organizations** who
 
 ## Azure Integration Features
 
-✅ **Azure Blob Storage** - Native media storage integration (strapi media) 
+✅ **Azure Blob Storage** - Native media storage integration (strapi media)
 ✅ **Azure Database** - Support for Azure SQL, PostgreSQL, MySQL (strapi database)
 ✅ **Azure Container Registry** - Optimized for ACR deployment  (image hosting in ACR or docker hub)
 ✅ **Azure Front Door CDN** - Built-in CDN configuration for media files (to provide media files through de custom CDN)
-✅ **Azure File Shares** - Application data persistence (strapi data schemas, might be synchronised accross your env stages) 
+✅ **Azure File Shares** - Application data persistence (strapi data schemas, might be synchronised accross your env stages)
 ✅ **Azure App Container Instances** - Ready for ACI or ACA deployment (main strapi web instance)
 
 ## Getting Started
@@ -139,6 +139,9 @@ services:
       - JWT_SECRET=your-jwt-secret
       - TRANSFER_TOKEN_SALT=your-transfer-token-salt
       - ALLOWED_HOSTS=admin-portal-host.uri.fr
+      - STRAPI_TRANSFER_TOKEN=${STRAPI_TRANSFER_TOKEN} # New environment variable for distant Strapi transfer token
+      - STRAPI_TRANSFER_URL=${STRAPI_TRANSFER_URL} # New environment variable for distant Strapi transfer URL
+      - STRAPI_ENABLE_REMOTE_DATA_TRANSFER=${STRAPI_ENABLE_REMOTE_DATA_TRANSFER} # New environment variable to enable remote data transfer
     
     volumes:
       # Mount your application source code for development
