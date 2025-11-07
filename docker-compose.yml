@@ -33,6 +33,9 @@ services:
       - APP_KEYS=${APP_KEYS}
       - API_TOKEN_SALT=${API_TOKEN_SALT}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS} # New environment variable for allowed hosts in Vite config    
+      - STRAPI_TRANSFER_TOKEN=${STRAPI_TRANSFER_TOKEN} # New environment variable for distant Strapi transfer token
+      - STRAPI_TRANSFER_URL=${STRAPI_TRANSFER_URL} # New environment variable for distant Strapi transfer URL
+      - STRAPI_ENABLE_REMOTE_DATA_TRANSFER=${STRAPI_ENABLE_REMOTE_DATA_TRANSFER} # New environment variable to enable remote data transfer
 
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
