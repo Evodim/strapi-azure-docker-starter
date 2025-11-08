@@ -176,6 +176,42 @@ volumes:
 - Uncomment the volume mount `./app:/srv/app/src` to edit code locally
 - Change `NODE_ENV=development`
 
+## Image customization
+
+### Build Arguments
+
+You can customize the Docker image build process using build arguments (`--build-arg`). This allows you to control the base image and environment configuration.
+
+#### Available Build Arguments
+
+| Argument | Default Value | Description |
+|----------|---------------|-------------|
+| `BASE_IMAGE` | `node` | Base Docker image (e.g., `node`, `arm64v8/node` for ARM architecture) |
+| `NODE_VERSION` | `22-alpine` | Node.js version and variant for the base image |
+| `NODE_ENV` | `production` | Node.js environment mode (production/development) |
+
+#### Examples
+
+**Build for ARM64 architecture with custom Node version:**
+
+```bash
+# Custom ARM64 build (as shown in your last build)
+docker build . \
+  --build-arg BASE_IMAGE=arm64v8/node \
+  -t evodim/strapi-azure:v2.5.30-arm
+```
+
+**Build for standard AMD64 architecture:**
+
+```bash
+# Standard x86_64/AMD64 build
+docker build . \
+  --build-arg BASE_IMAGE=node \
+  -t evodim/strapi-azure:v2.5.30
+```
+
+**Tip:** Combine `BASE_IMAGE` and `NODE_VERSION` to target specific architectures and Node.js versions for your deployment needs.
+
 ## Example: Full Azure Infrastructure
 
 Here's a complete Azure setup example for hosting Strapi in production:
@@ -221,15 +257,15 @@ This image follows a structured versioning strategy to ensure compatibility and 
 
 | Image Version | Strapi Version | Description |
 |---------------|----------------|-------------|
-| `v25.28.00` | Strapi 5.x | Image v2 with Strapi 5, build 28 | Docker image version minor 0
-| `v25.30.00` | Strapi 5.x | Image v2 with Strapi 5, build 30 | Docker image version minor 0
-| `v25.30.01` | Strapi 5.x | Image v2 with Strapi 5, build 30 | Docker image version minor 1 (fixes or enhancements for same strapi version)
+| `v2.5.28` | Strapi 5.x | Image v2 with Strapi 5, build 28 | Docker image version minor 0
+| `v2.5.30` | Strapi 5.x | Image v2 with Strapi 5, build 30 | Docker image version minor 0
+| `v2.5.30` | Strapi 5.x | Image v2 with Strapi 5, build 30 | Docker image version minor 1 (fixes or enhancements for same strapi version)
 
 ### Available Tags
 
 - **`latest`** - Always points to the most recent stable release
-- **`v25.28.00`** - Specific version for production deployments
-- **`dev`** - Development version with additional debugging tools
+- **`v2.5.28`** - Specific version for production deployments
+- **`preview`** - Preview version, pre release
 
 ### Release Types
 
@@ -245,12 +281,6 @@ This image follows a structured versioning strategy to ensure compatibility and 
 - New Strapi major version support
 - Breaking changes in Strapi API
 - Significant feature additions
-
-**🔧 Image Updates (v2 → v3)**
-
-- Docker image architecture changes
-- Base image updates (Node.js versions)
-- Major Azure integration changes
 
 ### Usage Recommendations
 

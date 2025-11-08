@@ -1,6 +1,9 @@
 # Build stage
 ARG NODE_VERSION="22-alpine"
-FROM node:${NODE_VERSION} AS base-image
+# Use build argument to specify base image
+#  arm64v8/node for ARM architecture
+ARG BASE_IMAGE="node"
+FROM ${BASE_IMAGE}:${NODE_VERSION} AS base-image
 
 FROM base-image
 # Set build arguments and environment
