@@ -31,7 +31,7 @@ RUN apk update && apk add --no-cache \
     && rm -rf /var/cache/apk/*
     
 # Set up Node.js environment
-RUN yarn global add node-gyp && \
+RUN yarn global add node-gyp patch-package && \
     yarn config set network-timeout 600000 -g
 
 # Create Strapi application directory and initialize
@@ -63,8 +63,7 @@ RUN yarn add \
     strapi-provider-upload-azure-storage \
     @strapi/utils \
     @strapi/plugin-documentation \
-    @strapi/database
-   
+    @strapi/database 
 
 # Create src directory
 RUN mkdir -p src
@@ -72,9 +71,10 @@ RUN mkdir -p src
 # Copy assets directory to image (will be copied to destinations at runtime by entrypoint)
 COPY assets /srv/app/assets
 
-# Copy entrypoint script
+# Copy entrypoint script and fix line endings (convert CRLF to LF for Windows compatibility)
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh && \
+    chmod +x /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /srv/app/src
 
