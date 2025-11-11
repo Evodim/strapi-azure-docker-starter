@@ -1,0 +1,6 @@
+# Ensure shell scripts always use LF line endings (even on Windows)
+*.sh text eol=lf
+
+# Ensure Dockerfiles use LF
+Dockerfile text eol=lf
+docker-entrypoint.sh text eol=lf
