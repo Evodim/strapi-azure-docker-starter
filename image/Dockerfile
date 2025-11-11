@@ -68,9 +68,10 @@ RUN mkdir -p src
 # Copy assets directory to image (will be copied to destinations at runtime by entrypoint)
 COPY assets /srv/app/assets
 
-# Copy entrypoint script
+# Copy entrypoint script and fix line endings (convert CRLF to LF for Windows compatibility)
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh && \
+    chmod +x /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /srv/app/src
 
